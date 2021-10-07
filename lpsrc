@@ -5,6 +5,8 @@ DT=`date +%Y-%m-%dT%H%M%S`
 alias lpsenv='cd ~/.lpsenv'
 alias lps='cd ~/gitlab/lpsbase'
 
-alias benv='lps; source env/build.bashrc'
+alias bdevenv='lps; source env/build-dev.bashrc'
+alias bprodenv='lps; source env/build.bashrc'
 alias lbuild='lps; make PKG_ID=mc_lps PKG_TYPE=opt export | tee lps_$DT.log'
 alias cbuild='lps; make clean; lbuild'
+alias rmsymlinks='lps; cd lib; find . -type l -depth 1 -exec rm {} \;'
