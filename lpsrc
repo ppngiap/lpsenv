@@ -2,6 +2,20 @@ alias l='vim ~/.lpsenv/lpsrc; . ~/.lpsenv/lpsrc'
 
 DT=`date +%Y-%m-%dT%H%M%S`
 
+
+function pushlpsenv() {
+        ssh -t $1 "if \[ ! -d ~/.lpsenv \]; then mkdir ~/.lpsenv; fi"
+        scp ~/.lpsenv/* $1:~/.lpsenv/
+}
+
+
+
+function pulllpsenv() {
+        ssh -t $1 "ls -l ~/.lpsenv/*"
+        scp -r $1:~/.lpsenv/* ~/.lpsenv/
+}
+
+
 alias lpsenv='cd ~/.lpsenv'
 alias lps='cd ~/gitlab/lpsbase'
 
