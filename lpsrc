@@ -5,22 +5,49 @@ DT=`date +%Y-%m-%dT%H%M%S`
 
 function pushlpsenv() {
         ssh -t $1 "if \[ ! -d ~/.lpsenv \]; then mkdir ~/.lpsenv; fi"
-        scp ~/.lpsenv/* $1:~/.lpsenv/
+        scp -r ~/.lpsenv/* $1:~/.lpsenv/
 }
-
-
 
 function pulllpsenv() {
         ssh -t $1 "ls -l ~/.lpsenv/*"
         scp -r $1:~/.lpsenv/* ~/.lpsenv/
 }
 
+function ports() {
+	if [[ $OSTYPE == linux* ]]; then
+		netstat -an
+	elif [[ $OSTYPE == darwin* ]]; then
+		lsof -Pnl +M -i -cmd | grep -E "LISTEN|TCP|UDP"
+	fi
+}
 
 alias lpsenv='cd ~/.lpsenv'
 alias lps='cd ~/gitlab/lpsbase'
+alias ag='alias | grep'
+alias hg='history | grep'
 
 alias bdevenv='lps; source env/build-dev.bashrc'
 alias bprodenv='lps; source env/build.bashrc'
 alias lbuild='lps; make PKG_ID=mc_lps PKG_TYPE=opt export | tee lps_$DT.log'
 alias cbuild='lps; make clean; lbuild'
 alias rmsymlinks='lps; cd lib; find . -type l -depth 1 -exec rm {} \;'
+
+alias sim='cd ~/lps_testing/simulators'
+alias vlasim='sim; cd sim'
+alias enlssim='sim; cd enls'
+alias cnlssim='sim; cd cnls'
+alias smscsim='sim; cd smscsim'
+alias cpmpcsim='sim; cd cpmpc'
+
+alias cnlsrun='cnlssim; nohup java -Done-jar.silent=true -jar mlpSim-0.2.one-jar.jar ./cnlsSim.properties > debug.log 2> error.log &'
+alias enlsrun='enlssim; nohup java -Done-jar.silent=true -jar mlpSim-0.2.one-jar.jar ./mpcSimEme.properties > debug.log 2> error.log &'
+alias cpmpcrun='cpmpcsim; nohup java -Done-jar.silent=true -jar mlpSim-0.2.one-jar.jar ./cpmpcSim.properties > debug.log 2> error.log &'
+alias smscrun='smscsim; source ~/venv/bin/activate; python smsc_simulator.py > debug.log 2> error.log &'
+alias simrun='pushd .; cnlsrun; enlsrun; cpmpcrun; smscrun; popd'
+
+alias alog='tail -f /opt/logs/adminserver/AdminServer.log'
+alias l1log='tail -f /opt/logs/llgateway/LLGateway1.log'
+alias d1log='tail -f /opt/logs/llgateway/debug_mpc01.log'
+alias l2log='tail -f /opt/logs/llgateway/LLGateway2.log'
+alias d2log='tail -f /opt/logs/llgateway/debug_mpc02.log'
+
