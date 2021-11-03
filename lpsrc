@@ -21,6 +21,23 @@ function ports() {
 	fi
 }
 
+function gradleClasspath() {
+  echo "\$1 = $1"
+  cmd=$1":dependencies --configuration $2"
+  echo "\$cmd =  $cmd"
+  ./gradlew $cmd
+}
+
+function gradleCompileClasspath() {
+  gradleClasspath $1 "compileClasspath"
+}
+alias gccp=gradleCompileClasspath
+
+function gradleTestCompileClasspath() {
+  gradleClasspath $1 "testCompileClasspath"
+}
+alias gtcc=gradleTestCompileClasspath
+
 alias lpsenv='cd ~/.lpsenv'
 alias lps='cd ~/gitlab/lpsbase'
 alias ag='alias | grep'
