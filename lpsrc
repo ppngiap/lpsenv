@@ -1,3 +1,5 @@
+source ~/.lpsenv/git-pipeline-env
+
 alias l='vim ~/.lpsenv/lpsrc; . ~/.lpsenv/lpsrc'
 
 DT=`date +%Y-%m-%dT%H%M%S`
@@ -39,7 +41,9 @@ function gradleTestCompileClasspath() {
 alias gtcc=gradleTestCompileClasspath
 
 alias lpsenv='cd ~/.lpsenv'
-alias lps='cd ~/gitlab/lpsbase'
+alias lps='cd ~/gitlab/lps-services'
+alias lpsbase='cd ~/gitlab/lpsbase'
+alias vdp='lps; cd locationlogic/vdp'
 alias ag='alias | grep'
 alias hg='history | grep'
 
@@ -67,4 +71,6 @@ alias l1log='tail -f /opt/logs/llgateway/LLGateway1.log'
 alias d1log='tail -f /opt/logs/llgateway/debug_mpc01.log'
 alias l2log='tail -f /opt/logs/llgateway/LLGateway2.log'
 alias d2log='tail -f /opt/logs/llgateway/debug_mpc02.log'
+
+alias lpsfindjar='find . -name "*.kts" -exec grep jar\" {} \;'
 
