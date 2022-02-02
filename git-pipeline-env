@@ -42,5 +42,4 @@ export DEBIAN_DEB_ORG_REMOTE_REPO_ID=debian-deb-org-remote
 
 export ARTIFACTORY_URL=https://artifactory.comtech-idn.com/artifactory
 export ARTIFACTORY_USER=tom.phan
-export ARTIFACTORY_APIKEY=AKCp8kqX2drr9RTTekBySDyXiCPDocchmcN5u16N5zuhgaLx3uWidkFFPUsEuyauNq4XS4tNi
 
