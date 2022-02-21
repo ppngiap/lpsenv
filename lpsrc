@@ -1,6 +1,7 @@
 source ~/.lpsenv/git-pipeline-env
 
 alias l='vim ~/.lpsenv/lpsrc; . ~/.lpsenv/lpsrc'
+alias ll='. ~/.lpsenv/lpsrc'
 
 DT=`date +%Y-%m-%dT%H%M%S`
 
@@ -74,3 +75,19 @@ alias d2log='tail -f /opt/logs/llgateway/debug_mpc02.log'
 
 alias lpsfindjar='find . -name "*.kts" -exec grep jar\" {} \;'
 
+
+alias remoteStartLpsAdmin="ssh lbsadm 'sh -c '\''nohup /opt/lbs/scripts/startAdmin.sh 2>&1 & '\'' ' " 
+alias remoteViewAdminBootProperties="ssh lbsadm 'cat /opt/lbs/domains/vzwlps/servers/AdminServer/security/boot.properties' "
+alias remoteTailAdminServerLog="ssh -t lbsadm 'tail -f /opt/logs/adminserver/AdminServer.log' " 
+
+alias 1remoteStartLpsGw="ssh lbsgw1 'sh -c '\''nohup /opt/lbs/scripts/startNM.sh 2>&1 & '\'' ' " 
+alias 1remoteStopLpsGw="ssh lbsgw1 'sh -c '\''nohup /opt/lbs/scripts/stopNM.sh 2>&1 & '\'' ' " 
+
+alias 1ssh='ssh lbsgw1'
+alias 2ssh='ssh lbsgw2'
+alias 1remoteViewNodeManagerPropeties="ssh -t lbsgw1 'cat /opt/lbs/domains/vzwlps/nodemanager/nodemanager.properties' "
+alias 2remoteViewNodeManagerPropeties="ssh -t lbsgw2 'cat /opt/lbs/domains/vzwlps/nodemanager/nodemanager.properties' "
+
+#alias 1tailNodeManagerLog="ssh -t lbsgw1 'tail -f /opt/lbs/domains/vzwlps/nodemanager/nodemanager.log' "
+alias 1tailNodeManagerLog="ssh -t lbsgw1 'tail -f /opt/logs/nodemanager/nodemanager.log' "
+alias 2tailNodeManagerLog="ssh -t lbsgw2 'tail -f /opt/lbs/domains/vzwlps/nodemanager/nodemanager.log' "
