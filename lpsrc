@@ -11,17 +11,17 @@ function pushlpsenv() {
         scp -r ~/.lpsenv/* $1:~/.lpsenv/
 }
 
+alias lpspush=pushlpsenv
+
 function pulllpsenv() {
         ssh -t $1 "ls -l ~/.lpsenv/*"
         scp -r $1:~/.lpsenv/* ~/.lpsenv/
 }
 
+alias lpspull=pulllpsenv
+
 function ports() {
-	if [[ $OSTYPE == linux* ]]; then
-		netstat -an
-	elif [[ $OSTYPE == darwin* ]]; then
-		lsof -Pnl +M -i -cmd | grep -E "LISTEN|TCP|UDP"
-	fi
+  lsof -Pnl +M -i -cmd | grep -E "LISTEN|TCP|UDP"
 }
 
 function gradleClasspath() {
@@ -73,6 +73,9 @@ alias d1log='tail -f /opt/logs/llgateway/debug_mpc01.log'
 alias l2log='tail -f /opt/logs/llgateway/LLGateway2.log'
 alias d2log='tail -f /opt/logs/llgateway/debug_mpc02.log'
 
+alias mpc.properties='vim /opt/lbs/llgateway/properties/mpc.properties'
+alias vmpc=mpc.properties
+
 alias lpsfindjar='find . -name "*.kts" -exec grep jar\" {} \;'
 
 
@@ -84,10 +87,18 @@ alias 1remoteStartLpsGw="ssh lbsgw1 'sh -c '\''nohup /opt/lbs/scripts/startNM.sh
 alias 1remoteStopLpsGw="ssh lbsgw1 'sh -c '\''nohup /opt/lbs/scripts/stopNM.sh 2>&1 & '\'' ' " 
 
 alias 1ssh='ssh lbsgw1'
+alias sshgw1='ssh lbsgw1'
+
 alias 2ssh='ssh lbsgw2'
+alias sshgw2='ssh lbsgw2'
+
 alias 1remoteViewNodeManagerPropeties="ssh -t lbsgw1 'cat /opt/lbs/domains/vzwlps/nodemanager/nodemanager.properties' "
 alias 2remoteViewNodeManagerPropeties="ssh -t lbsgw2 'cat /opt/lbs/domains/vzwlps/nodemanager/nodemanager.properties' "
 
 #alias 1tailNodeManagerLog="ssh -t lbsgw1 'tail -f /opt/lbs/domains/vzwlps/nodemanager/nodemanager.log' "
 alias 1tailNodeManagerLog="ssh -t lbsgw1 'tail -f /opt/logs/nodemanager/nodemanager.log' "
 alias 2tailNodeManagerLog="ssh -t lbsgw2 'tail -f /opt/lbs/domains/vzwlps/nodemanager/nodemanager.log' "
+
+alias wlst='sh /opt/thirdparty/oracle/oracle_common/common/bin/wlst.sh'
+
+alias socket='sudo ss -tunelp'
