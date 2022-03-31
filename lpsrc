@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias l='vim ~/.lpsenv/lpsrc; . ~/.lpsenv/lpsrc'
 
 DT=`date +%Y-%m-%dT%H%M%S`
@@ -7,6 +9,8 @@ function pushlpsenv() {
         ssh -t $1 "if \[ ! -d ~/.lpsenv \]; then mkdir ~/.lpsenv; fi"
         scp -r ~/.lpsenv/* $1:~/.lpsenv/
 }
+
+alias pushlpsbuild='pushlpsenv lpsbuild'
 
 function pulllpsenv() {
         ssh -t $1 "ls -l ~/.lpsenv/*"
@@ -67,4 +71,9 @@ alias l1log='tail -f /opt/logs/llgateway/LLGateway1.log'
 alias d1log='tail -f /opt/logs/llgateway/debug_mpc01.log'
 alias l2log='tail -f /opt/logs/llgateway/LLGateway2.log'
 alias d2log='tail -f /opt/logs/llgateway/debug_mpc02.log'
+
+alias jsongrep='echo "find . -name "*.json" -exec grep -H \$1 {} \;" > /tmp/jsongrep.sh ; . /tmp/jsongrep.sh'
+alias pomgrep='echo "find . -name "pom.xml" -exec grep -H \$1 {} \;" > /tmp/pomgrep.sh ; . /tmp/pomgrep.sh'
+alias antgrep='echo "find . -name "build.xml" -exec grep -H \$1 {} \;" > /tmp/pomgrep.sh ; . /tmp/pomgrep.sh'
+alias propgrep='echo "find . -name "*.properties" -exec grep -H \$1 {} \;" > /tmp/pomgrep.sh ; . /tmp/pomgrep.sh'
 
