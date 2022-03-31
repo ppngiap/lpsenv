@@ -102,3 +102,9 @@ alias 2tailNodeManagerLog="ssh -t lbsgw2 'tail -f /opt/lbs/domains/vzwlps/nodema
 alias wlst='sh /opt/thirdparty/oracle/oracle_common/common/bin/wlst.sh'
 
 alias socket='sudo ss -tunelp'
+
+alias llcurl='curl -H "X-JFrog-Art-Api:$ARTIFACTORY_APIKEY" -O "https://artifactory.comtech-idn.com/artifactory/maven-development-local/com/comtechtel/lps/llgateway/llgateway/8.8.0.1/llgateway-8.8.0.1.ear"'
+
+alias dlogindevvirtual='docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWD docker-development-virtual.artifactory.comtech-idn.com'
+alias dlogindevlocal='docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWD docker-development-local.artifactory.comtech-idn.com'
+alias dloginthirdpatylocal='docker login -u $ARTIFACTORY_USER -p $ARTIFACTORY_PASSWD docker-thirdparty-local.artifactory.comtech-idn.com'
